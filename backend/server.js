@@ -14,8 +14,8 @@ app.use(express.json()); // allows us to parse JSON in requests
 // 3️⃣ Temporary Database
 // ------------------------------
 let users = [
-  { id: 1, name: "Daniel", email: "daniel@example.com" },
-  { id: 2, name: "Alice", email: "alice@example.com" },
+  { id: 1, name: "Daniel", email: "daniel@example.com", password: "danny123" },
+  { id: 2, name: "Alice", email: "alice@example.com", password: "Alice123" },
 ];
 
 // ------------------------------
@@ -48,6 +48,7 @@ app.post("/users", (req, res) => {
     id: users.length + 1, // simple auto-increment ID
     name,
     email,
+    password,
   };
   users.push(newUser);
   res.status(201).json(newUser); // 201 = Created
@@ -61,6 +62,7 @@ app.put("/users/:id", (req, res) => {
   const { name, email } = req.body;
   if (name) user.name = name;
   if (email) user.email = email;
+  if (password) user.password = password;
 
   res.json(user);
 });
